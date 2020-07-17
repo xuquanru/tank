@@ -19,7 +19,9 @@ import java.util.List;
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH=800;
     public static final int GAME_HEIGHT=800;
+    Explode explode=new Explode(100, 100, this);
 
+    List<Explode> explodes=new ArrayList<>();
     List<Bullet> bullets= new ArrayList<>();
     List<Tank> tanks= new ArrayList<>();
 
@@ -66,6 +68,7 @@ public class TankFrame extends Frame {
         graphics.setColor(Color.white);
         graphics.drawString("子弹的数量"+bullets.size(), 10, 60);
         graphics.drawString("敌人的数量"+tanks.size(), 10, 80);
+        graphics.drawString("爆炸的数量"+explodes.size(), 10, 100);
         graphics.setColor(color);
         mytank.paint(graphics);
         for (int i = 0; i < bullets.size(); i++) {
@@ -83,6 +86,12 @@ public class TankFrame extends Frame {
                 bullets.get(i).collideWith(tanks.get(j));
             }
         }
+
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(graphics);
+        }
+
+
 
     }
 
