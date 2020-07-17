@@ -12,7 +12,7 @@ import java.util.Random;
  * 🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌行而不辍，未来可期🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌
  **/
 public class Tank {
-    private static final int SPEED = 1;
+    private static final int SPEED = 3;
     private TankFrame tankFrame;//所在Frame
     private int x, y;
     private Dir dir = Dir.DOWN;
@@ -46,7 +46,7 @@ public class Tank {
     }
 
 
-    public static  int WIDTH=ResourceMgr.tankD.getWidth(),HEIGHT=ResourceMgr.tankD.getHeight();
+    public static  int WIDTH=ResourceMgr.goodTankU.getWidth(),HEIGHT=ResourceMgr.goodTankU.getHeight();
 
     private boolean moving = true;
 
@@ -80,14 +80,16 @@ public class Tank {
             tankFrame.tanks.remove(this);
         };
 
+
+
         switch (dir) {
-            case LEFT:graphics.drawImage(ResourceMgr.tankL, x, y, null);
+            case LEFT:graphics.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankL:ResourceMgr.badTankL, x, y, null);
                 break;
-            case UP:graphics.drawImage(ResourceMgr.tankU, x, y, null);
+            case UP:graphics.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankU:ResourceMgr.badTankU, x, y, null);
                 break;
-            case RIGHT:graphics.drawImage(ResourceMgr.tankR, x, y, null);
+            case RIGHT:graphics.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankR:ResourceMgr.badTankR, x, y, null);
                 break;
-            case DOWN:graphics.drawImage(ResourceMgr.tankD, x, y, null);
+            case DOWN:graphics.drawImage(this.group==Group.GOOD?ResourceMgr.goodTankD:ResourceMgr.badTankD, x, y, null);
                 break;
         }
 
