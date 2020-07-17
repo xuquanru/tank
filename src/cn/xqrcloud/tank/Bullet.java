@@ -13,19 +13,17 @@ import java.awt.*;
 public class Bullet {
     public static final int SPEED=10;
     public static  int WIDTH=ResourceMgr.bulletD.getWidth(),HEIGHT=ResourceMgr.bulletD.getHeight();
-
-
-
     private boolean living = true;
     private TankFrame tankFrame=null;
-
     private int x,y;
     private Dir dir;
+    private Group group=Group.BAD;
 
-    public Bullet(int x, int y, Dir dir,TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group=group;
         this.tankFrame=tankFrame;
     }
 
@@ -60,6 +58,7 @@ public class Bullet {
     }
 
     public void collideWith(Tank tank) {
+        if(this.group==tank.getGroup())return;
         Rectangle rectangle1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
         Rectangle rectangle2 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
        if(rectangle1.intersects(rectangle2)){

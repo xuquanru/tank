@@ -24,7 +24,7 @@ public class TankFrame extends Frame {
     List<Tank> tanks= new ArrayList<>();
 
 
-    Tank mytank = new Tank(200, 400, Dir.DOWN,this);
+    Tank mytank = new Tank(200, 400, Dir.DOWN,this,Group.GOOD);
 
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);

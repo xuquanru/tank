@@ -1,6 +1,7 @@
 package cn.xqrcloud.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌道阻且长，行则将至🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌
@@ -11,10 +12,22 @@ import java.awt.*;
  * 🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌行而不辍，未来可期🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌🐌
  **/
 public class Tank {
+    private static final int SPEED = 1;
     private TankFrame tankFrame;//所在Frame
     private int x, y;
     private Dir dir = Dir.DOWN;
     private boolean living=true;
+    Random random=new Random();
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    private Group group=Group.BAD;
 
     public int getX() {
         return x;
@@ -32,10 +45,10 @@ public class Tank {
         this.y = y;
     }
 
-    private static final int SPEED = 10;
+
     public static  int WIDTH=ResourceMgr.tankD.getWidth(),HEIGHT=ResourceMgr.tankD.getHeight();
 
-    private boolean moving = false;
+    private boolean moving = true;
 
     public boolean isMoving() {
         return moving;
@@ -53,11 +66,12 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.tankFrame=tankFrame;
+        this.group=group;
     }
 
     public void paint(Graphics graphics) {
@@ -97,12 +111,14 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+        if(random.nextInt(10)>5) this.fire();
     }
 
     public void fire() {
         int bX=x+Tank.WIDTH/2-Bullet.WIDTH/2;
         int bY=y+Tank.HEIGHT/2-Bullet.HEIGHT/2;
-        tankFrame.bullets.add(new Bullet(bX, bY, this.dir,this.tankFrame));
+        tankFrame.bullets.add(new Bullet(bX, bY, this.dir,this.tankFrame,this.group));
     }
 
     public void die() {
