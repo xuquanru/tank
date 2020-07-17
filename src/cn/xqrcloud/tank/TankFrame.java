@@ -65,6 +65,7 @@ public class TankFrame extends Frame {
         Color color = graphics.getColor();
         graphics.setColor(Color.white);
         graphics.drawString("子弹的数量"+bullets.size(), 10, 60);
+        graphics.drawString("敌人的数量"+tanks.size(), 10, 80);
         graphics.setColor(color);
         mytank.paint(graphics);
         for (int i = 0; i < bullets.size(); i++) {
@@ -74,6 +75,15 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tanks.size(); i++) {
             tanks.get(i).paint(graphics);
         }
+
+        //判断坦克是否碰撞
+
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < tanks.size(); j++) {
+                bullets.get(i).collideWith(tanks.get(j));
+            }
+        }
+
     }
 
     class MykeyListener extends KeyAdapter {
