@@ -18,6 +18,7 @@ public class Bullet {
     private int x,y;
     private Dir dir;
     private Group group=Group.BAD;
+    Rectangle rectangle=new Rectangle();
 
     public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
         this.x = x;
@@ -25,6 +26,10 @@ public class Bullet {
         this.dir = dir;
         this.group=group;
         this.tankFrame=tankFrame;
+        this.rectangle.x = this.x;
+        this.rectangle.y = this.y;
+        rectangle.width = WIDTH;
+        rectangle.height = HEIGHT;
     }
 
     public void paint(Graphics graphics) {
@@ -52,6 +57,9 @@ public class Bullet {
             case UP:y-=SPEED;break;
             case DOWN:y+=SPEED;break;
         }
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+
         if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
