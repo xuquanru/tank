@@ -14,7 +14,7 @@ public class Bullet {
     public static final int SPEED=10;
     public static  int WIDTH=ResourceMgr.bulletD.getWidth(),HEIGHT=ResourceMgr.bulletD.getHeight();
     private boolean living = true;
-    private TankFrame tankFrame=null;
+    TankFrame tankFrame=null;
     private int x,y;
     private Dir dir;
     private Group group=Group.BAD;
@@ -30,6 +30,7 @@ public class Bullet {
         this.rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
+        tankFrame.bullets.add(this);
     }
 
     public void paint(Graphics graphics) {
