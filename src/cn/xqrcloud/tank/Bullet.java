@@ -14,28 +14,28 @@ public class Bullet {
     public static final int SPEED=10;
     public static  int WIDTH=ResourceMgr.bulletD.getWidth(),HEIGHT=ResourceMgr.bulletD.getHeight();
     private boolean living = true;
-    TankFrame tankFrame=null;
+    Gamemodel gamemodel=null;
     private int x,y;
     private Dir dir;
     private Group group=Group.BAD;
     Rectangle rectangle=new Rectangle();
 
-    public Bullet(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
+    public Bullet(int x, int y, Dir dir,Gamemodel gamemodel,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group=group;
-        this.tankFrame=tankFrame;
+        this.gamemodel=gamemodel;
         this.rectangle.x = this.x;
         this.rectangle.y = this.y;
         rectangle.width = WIDTH;
         rectangle.height = HEIGHT;
-        tankFrame.bullets.add(this);
+        gamemodel.bullets.add(this);
     }
 
     public void paint(Graphics graphics) {
         if(!living){
-            tankFrame.bullets.remove(this);
+            gamemodel.bullets.remove(this);
         }
 
         switch (dir) {
@@ -75,7 +75,7 @@ public class Bullet {
            this.die();
            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-           tankFrame.explodes.add(new Explode(eX, eY, tankFrame));
+           gamemodel.explodes.add(new Explode(eX,eY,gamemodel));
        }
     }
 

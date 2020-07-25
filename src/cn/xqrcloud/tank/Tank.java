@@ -13,7 +13,7 @@ import java.util.Random;
  **/
 public class Tank {
     private static final int SPEED = 3;
-    TankFrame tankFrame;//所在Frame
+    //TankFrame tankFrame;//所在Frame
     private int x, y;
     Dir dir = Dir.DOWN;
     private boolean living=true;
@@ -67,11 +67,13 @@ public class Tank {
         this.dir = dir;
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tankFrame,Group group) {
+    Gamemodel gamemodel;
+
+    public Tank(int x, int y, Dir dir,Gamemodel gamemodel,Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tankFrame=tankFrame;
+        this.gamemodel=gamemodel;
         this.group=group;
         this.rectangle.x = this.x;
         this.rectangle.y = this.y;
@@ -95,7 +97,7 @@ public class Tank {
     public void paint(Graphics graphics) {
 
         if(!living) {
-            tankFrame.tanks.remove(this);
+            gamemodel.tanks.remove(this);
         };
 
 
